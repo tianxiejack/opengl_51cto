@@ -18,7 +18,7 @@ typedef struct float3
     float   w;
 }float3_t;
 
-float3_t  _circle[360*3];
+float3_t  _circle[362];
 
 void myDisplay(void)
 {
@@ -34,29 +34,25 @@ void myDisplay(void)
        glOrtho(0,_width,_height,0,-100,100);
 
        float   cx  =   100;
-       float   cy  =   100;
-       float   cz  =   0;
-       float   r   =   80;
+	   float   cy  =   100;
+	   float   cz  =   0;
+	   float   r   =   80;
 
-       glColor3f(1,1,1);
+	   glColor3f(1,1,1);
 
-       for (int i = 0 ;i < 360 ; ++ i)
-       {
-           _circle[i * 3 + 0].x    =  cx;
-           _circle[i * 3 + 0].y    =  cy;
-           _circle[i * 3 + 0].z    =  cz;
+	   _circle[0].x    =  cx;
+	   _circle[0].y    =  cy;
+	   _circle[0].z    =  cz;
 
-           _circle[i * 3 + 1].x    =  (float)cos((double)i * M_PI/180) * r + cx;
-           _circle[i * 3 + 1].y    =  (float)sin((double)i * M_PI/180) * r + cy;
-           _circle[i * 3 + 1].z    =  cz;
-
-           _circle[i * 3 + 2].x    =  (float)cos((double)(i + 1) * M_PI/180) * r + cx;
-           _circle[i * 3 + 2].y    =  (float)sin((double)(i + 1) * M_PI/180) * r + cy;
-           _circle[i * 3 + 2].z    =  cz;
-       }
-       glEnableClientState(GL_VERTEX_ARRAY);
-       glVertexPointer(3,GL_FLOAT,sizeof(float3_t),_circle);
-       glDrawArrays(GL_TRIANGLES,0,360 * 3);
+	   for (int i = 0 ;i <= 360 ; ++ i)
+	   {
+		   _circle[i + 1].x    =  (float)cos((double)i * M_PI/180) * r + cx;
+		   _circle[i + 1].y    =  (float)sin((double)i * M_PI/180) * r + cy;
+		   _circle[i + 1].z    =  cz;
+	   }
+	   glEnableClientState(GL_VERTEX_ARRAY);
+	   glVertexPointer(3,GL_FLOAT,sizeof(float3_t),_circle);
+	   glDrawArrays(GL_TRIANGLE_FAN,0,362);
 #endif
 
 
