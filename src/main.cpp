@@ -12,10 +12,9 @@ int _height = 600;
 
 #define M_PI (3.14159265358979323846)
 
-typedef struct float3
+typedef struct
 {
     float   x,y,z;
-    float   w;
 }float3_t;
 
 float3_t  _circle[362];
@@ -33,26 +32,19 @@ void myDisplay(void)
        glLoadIdentity();
        glOrtho(0,_width,_height,0,-100,100);
 
-       float   cx  =   100;
-	   float   cy  =   100;
-	   float   cz  =   0;
-	   float   r   =   80;
+       glColor3f(1,1,1);
 
-	   glColor3f(1,1,1);
-
-	   _circle[0].x    =  cx;
-	   _circle[0].y    =  cy;
-	   _circle[0].z    =  cz;
-
-	   for (int i = 0 ;i <= 360 ; ++ i)
+       float3_t  rect[]  =
 	   {
-		   _circle[i + 1].x    =  (float)cos((double)i * M_PI/180) * r + cx;
-		   _circle[i + 1].y    =  (float)sin((double)i * M_PI/180) * r + cy;
-		   _circle[i + 1].z    =  cz;
-	   }
+		   {10,    10,     0},
+		   {110,   10,     0},
+		   {10,    110,    0},
+		   {110,   110,    0},
+	   };
+
 	   glEnableClientState(GL_VERTEX_ARRAY);
-	   glVertexPointer(3,GL_FLOAT,sizeof(float3_t),_circle);
-	   glDrawArrays(GL_TRIANGLE_FAN,0,362);
+	   glVertexPointer(3,GL_FLOAT,sizeof(float3_t),rect);
+	   glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 #endif
 
 
