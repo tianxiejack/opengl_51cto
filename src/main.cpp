@@ -10,13 +10,13 @@ FreeTypeFont*	_font43;
 int _width = 800;
 int _height = 600;
 
-#define M_PI (3.14159265358979323846)
-
 struct  Vertex
 {
-   float   x,y,z;
-   float   r,g,b;
+    float   x,y,z;
+    float   r,g,b;
 };
+
+Vertex  _circle[360];
 
 void myDisplay(void)
 {
@@ -35,22 +35,30 @@ void myDisplay(void)
        glOrtho(0,_width,_height,0,-100,100);
 
 
-       glColor3f(1,0,1);
+       float   cx  =   100;
+       float   cy  =   100;
+       float   cz  =   0;
+       float   r   =   80;
+       //         x = cos(@) * r + centerx
+       //         y = sin(@) * r + centery
 
-       Vertex  rect[]  =
+       for (int i = 0 ;i < 360 ; ++ i)
        {
-           {10,    10,     0,  1,  0,  0},
-           {110,   10,     0,  0,  1,  0},
-           {160,   30,     0,  0,  0,  1},
-           {200,   110,    0,  1,  0,  1},
-           {160,   180,    0,  1,  0,  1},
-       };
+           _circle[i].x    =   cos(double(i) * M_PI / 180) * r + cx;
+           _circle[i].y    =   sin(double(i) * M_PI / 180) * r + cy;
+           _circle[i].z    =   cz;
+           _circle[i].r    =   1;
+           _circle[i].g    =   1;
+           _circle[i].b    =   1;
+       }
+
+
        glColor3f(1,0,1);
        glEnableClientState(GL_VERTEX_ARRAY);
        glEnableClientState(GL_COLOR_ARRAY);
-       glVertexPointer(3,GL_FLOAT,sizeof(Vertex),rect);
-       glColorPointer(3,GL_FLOAT,sizeof(Vertex),&rect[0].r);
-       glDrawArrays(GL_LINE_LOOP,1,5);
+       glVertexPointer(3,GL_FLOAT,sizeof(Vertex),_circle);
+       glColorPointer(3,GL_FLOAT,sizeof(Vertex),&_circle[0].r);
+       glDrawArrays(GL_LINE_LOOP,0, sizeof(_circle)/ sizeof(_circle[0]));
 
 
 #endif
