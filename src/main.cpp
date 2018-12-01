@@ -13,10 +13,9 @@ int _height = 600;
 struct  Vertex
 {
     float   x,y,z;
-    float   r,g,b;
 };
 
-Vertex  _circle[360];
+Vertex  _line[360];
 
 void myDisplay(void)
 {
@@ -26,7 +25,6 @@ void myDisplay(void)
 
 #if 1
 
-
 #define M_PI (3.14159265358979323846)
        //! 指定以下的操作针对投影矩阵
        glMatrixMode(GL_PROJECTION);
@@ -35,30 +33,21 @@ void myDisplay(void)
        glOrtho(0,_width,_height,0,-100,100);
 
 
-       float   cx  =   100;
-       float   cy  =   100;
-       float   cz  =   0;
-       float   r   =   80;
-       //         x = cos(@) * r + centerx
-       //         y = sin(@) * r + centery
-
-       for (int i = 0 ;i < 360 ; ++ i)
+       Vertex  vertex[]    =
        {
-           _circle[i].x    =   cos(double(i) * M_PI / 180) * r + cx;
-           _circle[i].y    =   sin(double(i) * M_PI / 180) * r + cy;
-           _circle[i].z    =   cz;
-           _circle[i].r    =   1;
-           _circle[i].g    =   1;
-           _circle[i].b    =   1;
-       }
+           {10,110,0},
+           {10,10,0},
 
+           {110,110,0},
+           {110,10,0},
 
-       glColor3f(1,0,1);
+           {210,110,0},
+           {210,10,0},
+       };
        glEnableClientState(GL_VERTEX_ARRAY);
-       glEnableClientState(GL_COLOR_ARRAY);
-       glVertexPointer(3,GL_FLOAT,sizeof(Vertex),_circle);
-       glColorPointer(3,GL_FLOAT,sizeof(Vertex),&_circle[0].r);
-       glDrawArrays(GL_LINE_LOOP,0, sizeof(_circle)/ sizeof(_circle[0]));
+       glVertexPointer(3,GL_FLOAT,sizeof(Vertex),vertex);
+       glDrawArrays(GL_TRIANGLE_STRIP,0, sizeof(vertex)/sizeof(vertex[0]));
+
 
 
 #endif
