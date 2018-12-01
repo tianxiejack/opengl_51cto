@@ -25,47 +25,34 @@ void myDisplay(void)
 	glViewport(0,0,_width,_height);
 
 #if 1
-//! 指定以下的操作针对投影矩阵
-glMatrixMode(GL_PROJECTION);
-//! 将投影举证清空成单位矩阵
-glLoadIdentity();
-glOrtho(0,_width,_height,0,-100,100);
 
 
-glColor3f(1,0,1);
-
-Vertex  rect[]  =
-{
-    {10,    10,     0,  1,  0,  0},
-    {110,   10,     0,  0,  1,  0},
-    {10,    110,    0,  0,  0,  1},
-    {110,   110,    0,  1,  0,  1},
-};
-glColor3f(1,0,1);
-glEnableClientState(GL_VERTEX_ARRAY);
-glEnableClientState(GL_COLOR_ARRAY);
-glVertexPointer(3,GL_FLOAT,sizeof(Vertex),rect);
-glColorPointer(3,GL_FLOAT,sizeof(Vertex),&rect[0].r);
-glDrawArrays(GL_TRIANGLE_STRIP,0,4);
+#define M_PI (3.14159265358979323846)
+       //! 指定以下的操作针对投影矩阵
+       glMatrixMode(GL_PROJECTION);
+       //! 将投影举证清空成单位矩阵
+       glLoadIdentity();
+       glOrtho(0,_width,_height,0,-100,100);
 
 
-Vertex  rect1[]  =
-{
-    {10,    10,     0,  1,  0,  0},
-    {110,   10,     0,  0,  1,  0},
-    {10,    110,    0,  0,  0,  1},
-    {110,   110,    0,  1,  0,  1},
-};
+       glColor3f(1,0,1);
 
-for (int i = 0 ;i < 4 ; ++ i )
-{
-    rect1[i].x += 100;
-}
+       Vertex  rect[]  =
+       {
+           {10,    10,     0,  1,  0,  0},
+           {110,   10,     0,  0,  1,  0},
+           {160,   30,     0,  0,  0,  1},
+           {200,   110,    0,  1,  0,  1},
+           {160,   180,    0,  1,  0,  1},
+       };
+       glColor3f(1,0,1);
+       glEnableClientState(GL_VERTEX_ARRAY);
+       glEnableClientState(GL_COLOR_ARRAY);
+       glVertexPointer(3,GL_FLOAT,sizeof(Vertex),rect);
+       glColorPointer(3,GL_FLOAT,sizeof(Vertex),&rect[0].r);
+       glDrawArrays(GL_LINE_LOOP,1,5);
 
-glVertexPointer(3,GL_FLOAT,sizeof(Vertex),rect1);
-glColorPointer(3,GL_FLOAT,sizeof(Vertex),&rect1[0].r);
-glColor3f(0,0,1);
-glDrawArrays(GL_TRIANGLE_STRIP,0,4);
+
 #endif
 
 
