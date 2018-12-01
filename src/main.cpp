@@ -35,18 +35,16 @@ void myDisplay(void)
 
        Vertex  vertex[]    =
        {
-           {10,110,0},
-           {10,10,0},
+           {50,0,0},
+           {100,50,0},
 
-           {110,110,0},
-           {110,10,0},
-
-           {210,110,0},
-           {210,10,0},
+           {80,100,0},
+           {60,100,0},
+           {10,50,0},
        };
        glEnableClientState(GL_VERTEX_ARRAY);
        glVertexPointer(3,GL_FLOAT,sizeof(Vertex),vertex);
-       glDrawArrays(GL_TRIANGLE_STRIP,0, sizeof(vertex)/sizeof(vertex[0]));
+       glDrawArrays(GL_TRIANGLE_FAN,0, sizeof(vertex)/sizeof(vertex[0]));
 
 
 
